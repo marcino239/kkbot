@@ -337,7 +337,7 @@ void loop() {
       float pid = P+I+D;
       
       // calculate motor speed - notice nonlinear function
-      float motors = (pid);   // this may require replacing with non linear function to increse precision at small angles
+      float motors = -(pid);   // this may require replacing with non linear function to increse precision at small angles
 
       // cap the value
       int motorsInput;
@@ -382,9 +382,9 @@ void setMotorSpeed( byte motor, int speed )
   motorSpeed[ motor ] = speed;
   
   if( motor == 0 )
-    OCR1A = abs( speed );
+    OCR1A = abs( 1023 - speed );
   else
-    OCR1B = abs( speed );
+    OCR1B = abs( 1023 - speed );
     
   motorsEnable = true;
 }
@@ -397,8 +397,8 @@ void switchMotorsOn( boolean resetSpeed )
     motorSpeed[ 1 ] = 0;
   }    
 
-  OCR1A = 0;
-  OCR1B = 0;
+  OCR1A = 1023;
+  OCR1B = 1023;
 
   motorsEnable = true;
 }
@@ -426,8 +426,8 @@ void beginMotorPWM()
   TIMSK1 |= _BV( OCIE1B );                // enable compare interrupt
   TIMSK1 |= _BV( TOIE1 );                 // enable overflow interrupt
 
-  OCR1A = 0;
-  OCR1B = 0;
+  OCR1A = 1023;
+  OCR1B = 1023;
 
   motorSpeed[ 0 ] = 0;
   motorSpeed[ 1 ] = 0;
