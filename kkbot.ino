@@ -62,6 +62,10 @@ byte motorSpeed[ MAX_MOTORS ];
 #define MOT_IN2  2       // OUT3    // PC2
 #define MOT_IN3  3       // OUT4    // PC3
 #define MOT_IN4  1       // OUT5    // PC1
+#define MOT_IN1_CH  OUT2       // OUT2    // PC4
+#define MOT_IN2_CH  OUT3       // OUT3    // PC2
+#define MOT_IN3_CH  OUT4       // OUT4    // PC3
+#define MOT_IN4_CH  OUT5       // OUT5    // PC1
 
 // balance control variables
 float dt = 0.1;
@@ -135,10 +139,10 @@ void setup() {
   analogReference(EXTERNAL); //important!!
 
   // init motors and set their speed to 0
-  pinMode( MOT_IN1, OUTPUT );
-  pinMode( MOT_IN2, OUTPUT );
-  pinMode( MOT_IN3, OUTPUT );
-  pinMode( MOT_IN4, OUTPUT );
+  pinMode( MOT_IN1_CH, OUTPUT );
+  pinMode( MOT_IN2_CH, OUTPUT );
+  pinMode( MOT_IN3_CH, OUTPUT );
+  pinMode( MOT_IN4_CH, OUTPUT );
   beginMotorPWM();  // freq = F_CPU / 1024  
 
   // display greeting
